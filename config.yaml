@@ -1,0 +1,9 @@
+mongo_uri: mongodb://localhost:27017
+db_name: company
+connection_timeout: 10000
+server_selection_timeout: 5000
+socket_timeout: 5000
+max_pool_size: 100
+min_pool_size: 10
+max_conn_idle_time: 60000
+port: 8888
