@@ -13,15 +13,15 @@ import (
 
 // Mock service for testing
 type mockEmployeeService struct {
-	InsertEmployeeFunc  func(models.Employee) (string, error)
+	InsertEmployeeFunc  func(models.Employee) (models.Employee, error)
 	GetEmployeeByIDFunc func(string) (models.Employee, error)
 	GetAllEmployeesFunc func() ([]models.Employee, error)
-	UpdateEmployeeFunc  func(string, models.Employee) (string, error)
+	UpdateEmployeeFunc  func(string, models.Employee) (models.Employee, error)
 }
 
 var _ service.EmployeeServiceInf = (*mockEmployeeService)(nil)
 
-func (m *mockEmployeeService) InsertEmployee(emp models.Employee) (string, error) {
+func (m *mockEmployeeService) InsertEmployee(emp models.Employee) (models.Employee, error) {
 	return m.InsertEmployeeFunc(emp)
 }
 func (m *mockEmployeeService) GetEmployeeByID(id string) (models.Employee, error) {
@@ -30,7 +30,7 @@ func (m *mockEmployeeService) GetEmployeeByID(id string) (models.Employee, error
 func (m *mockEmployeeService) GetAllEmployees() ([]models.Employee, error) {
 	return m.GetAllEmployeesFunc()
 }
-func (m *mockEmployeeService) UpdateEmployee(id string, emp models.Employee) (string, error) {
+func (m *mockEmployeeService) UpdateEmployee(id string, emp models.Employee) (models.Employee, error) {
 	return m.UpdateEmployeeFunc(id, emp)
 }
 
@@ -79,8 +79,8 @@ func TestGetByID_NotFound(t *testing.T) {
 
 func TestCreate_Success(t *testing.T) {
 	mockService := &mockEmployeeService{
-		InsertEmployeeFunc: func(emp models.Employee) (string, error) {
-			return "ok", nil
+		InsertEmployeeFunc: func(emp models.Employee) (models.Employee, error) {
+			return emp, nil
 		},
 	}
 	handler := NewEmployeeHandler(mockService)
