@@ -9,10 +9,10 @@ import (
 )
 
 type EmployeeHandler struct {
-	employeeService *service.EmployeeService
+	employeeService service.EmployeeServiceInf
 }
 
-func NewEmployeeHandler(empService *service.EmployeeService) *EmployeeHandler {
+func NewEmployeeHandler(empService service.EmployeeServiceInf) *EmployeeHandler {
 	return &EmployeeHandler{
 		employeeService: empService,
 	}
